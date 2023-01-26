@@ -10,7 +10,7 @@ let windSpeed       = document.querySelector('#wind');
 
 //Appel de l'API
 let majData = async () => {
-    let data = await fetch('https://api.openweathermap.org/data/2.5/weather?q=toulouse&appid=efc0b67a43b8a0ef061f770e6ba10b53&units=metric');
+    let data = await fetch('https://api.openweathermap.org/data/2.5/weather?q=toulouse&appid=&units=metric');
     let dataTransformed = await data.json();
     temp.innerText              = dataTransformed.main.temp+"°C";
     tempMin.innerText           = dataTransformed.main.temp_min;
