@@ -1,0 +1,77 @@
+body {
+    background-image: url("medias/day/nuageux.jpg");
+    font-family: 'Varela Round', sans-serif;
+    background-position:top;
+}
+
+#container {
+    background: rgba(255, 255, 255, 0.21);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    width: 40%;
+    min-height: 350px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50vh; /* poussé de la moitié de hauteur de viewport */
+    transform: translateY(-50%); /* tiré de la moitié de sa propre hauteur */
+    text-align: center;
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+
+#city {
+    flex: 20%;
+}
+
+#temp {
+    flex: 40%;
+    font-size: 4em;
+}
+
+#titles {
+    display: flex;
+    flex-direction: row;
+    flex : 10%;
+    width: 100%;
+}
+
+.subtitle {
+    flex: 20%;
+}
+
+#other-informations {
+    display: flex;
+    flex-direction: row;
+    flex : 30%;
+}
+
+#temp-min {
+    flex:20%;
+}
+#feels-like {
+    flex:20%;
+}
+#pressure {
+    flex:20%;
+}
+#humidity {
+    flex:20%;
+}
+#wind {
+    flex:20%;
+}
+
+button {
+    background-color: rgba(78, 76, 76, 0.588);
+    color: white;
+    border-radius: 7px;
+    height: 50px;
+    width: 150px;
+    border: 0px;
+    margin-bottom: 30px;
+}
