@@ -15,8 +15,8 @@ body {
     min-height: 350px;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 50vh; /* poussé de la moitié de hauteur de viewport */
-    transform: translateY(-50%); /* tiré de la moitié de sa propre hauteur */
+    margin-top: 40vh; /* poussé de la moitié de hauteur de viewport */
+    transform: translateY(-60%); /* tiré de la moitié de sa propre hauteur */
     text-align: center;
     color: white;
     display: flex;
@@ -24,8 +24,10 @@ body {
 }
 
 
-#city {
+#city-display {
     flex: 20%;
+    font-size: 2em;
+    padding-top: 15px;
 }
 
 #temp {
@@ -74,4 +76,35 @@ button {
     width: 150px;
     border: 0px;
     margin-bottom: 30px;
+}
+
+#search-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+    height: 40px;
+  
+}
+
+input {
+    width: 100%;
+    height: 35px;
+    background: rgba(255, 255, 255, 0.21);
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    font-family: 'Varela Round', sans-serif;
+    color: white;
+}
+
+#magnifying-glass {
+    height: 25px;
+    margin-left: 10px;
 }
