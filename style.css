@@ -1,5 +1,5 @@
 body {
-    background-image: url("medias/day/nuageux.jpg");
+    background-image: url("medias/night/rain.jpg");
     font-family: 'Varela Round', sans-serif;
     background-position:top;
 }
@@ -23,16 +23,26 @@ body {
     flex-direction: column;
 }
 
-
 #city-display {
     flex: 20%;
     font-size: 2em;
     padding-top: 15px;
 }
 
-#temp {
+#main-informations {
+    display: flex;
     flex: 40%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+#icon {
+    margin-left: 30px;
+}
+
+#temp {
     font-size: 4em;
+    flex: 70%;
 }
 
 #titles {
