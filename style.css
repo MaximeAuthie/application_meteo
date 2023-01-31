@@ -78,15 +78,7 @@ body {
     flex:20%;
 }
 
-button {
-    background-color: rgba(78, 76, 76, 0.588);
-    color: white;
-    border-radius: 7px;
-    height: 50px;
-    width: 150px;
-    border: 0px;
-    margin-bottom: 30px;
-}
+
 
 #search-container {
     display: flex;
@@ -117,4 +109,6 @@ input {
 #magnifying-glass {
     height: 25px;
     margin-left: 10px;
+    cursor: pointer;
 }
+
