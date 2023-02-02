@@ -70,57 +70,59 @@ function bodybackground (dayOrNight, weather) {
     }
 }
 
+// Fonction permettant de compléter les éléments du DOM après l'appel de l'API
+function fillElements (apiResponse, weather) {
+    // let weather                 = apiResponse.weather[0].main;
+    let weatherIcon             = apiResponse.weather[0].icon;
+    let dayOrNight              = weatherIcon[2];
+
+    cityDisplay.innerText       = apiResponse.name;
+    temp.innerText              = apiResponse.main.temp + "°C";
+    tempMin.innerText           = apiResponse.main.temp_min + "°C";
+    tempFeelsLike.innerText     = apiResponse.main.feels_like + "°C";
+    pressure.innerText          = apiResponse.main.pressure + "Pa";
+    humidity.innerText          = apiResponse.main.humidity + "%";
+    windSpeed.innerText         = apiResponse.wind.speed + "km/h";
+    img.setAttribute('src', "http://openweathermap.org/img/wn/" + weatherIcon + "@4x.png" );
+    citySearch.value ='';
+    console.log('Actualisation OK');
+        bodybackground(dayOrNight,weather);
+}
+
+// Fonction pour appeller l'API dans l'objectif d'actualiser les données
+
+function callApi () {
+    cityDisplay = document.querySelector('#city-display');
+    majData(cityDisplay.textContent);
+}
+
 // Fonction en cas d'échec de la géolocalisation
 function geolocationError () {
     citySearch = 'Paris';
     majData(citySearch);
 }
 
-//Appel de l'API en géolocalisant l'utilisateur
+// Appel de l'API en géolocalisant l'utilisateur (lattitude, longitude)
 if ("geolocation" in navigator) {
     navigator.geolocation.watchPosition( async (position) => {
-        let data                = await fetch('https://api.openweathermap.org/data/2.5/weather?lon=' + position.coords.longitude + '&lat='+ position.coords.latitude + '&appid=&units=metric'); //mettre la clé
-        console.log('https://api.openweathermap.org/data/2.5/weather?lon=' + position.coords.longitude + '&lat='+ position.coords.latitude + '&appid=&units=metric');
+        let data                = await fetch('https://api.openweathermap.org/data/2.5/weather?lon=' + position.coords.longitude + '&lat='+ position.coords.latitude + '&appid=efc0b67a43b8a0ef061f770e6ba10b53&units=metric'); //mettre la clé
         let dataTransformed     = await data.json();
         let weather             = dataTransformed.weather[0].main;
-        let icon                = dataTransformed.weather[0].icon;
-        let dayOrNight          = icon[2];
 
-        cityDisplay.innerText       = dataTransformed.name;
-        temp.innerText              = dataTransformed.main.temp + "°C";
-        tempMin.innerText           = dataTransformed.main.temp_min + "°C";
-        tempFeelsLike.innerText     = dataTransformed.main.feels_like + "°C";
-        pressure.innerText          = dataTransformed.main.pressure + "Pa";
-        humidity.innerText          = dataTransformed.main.humidity + "%";
-        windSpeed.innerText         = dataTransformed.wind.speed + "km/h";
-        img.setAttribute('src', "http://openweathermap.org/img/wn/" + icon + "@4x.png" );
-        citySearch.value ='';
-
-   bodybackground(dayOrNight,weather);
+        fillElements(dataTransformed,weather);
     }, geolocationError);
 }
 
-//Appel de l'API lors du click de recherche
+// Appel de l'API lors du click de recherche (nom de ville)
 let majData = async (citySearch) => {
-    city             = citySearch;
-    let data                = await fetch('https://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=&units=metric'); //mettre la clé
+    let data                = await fetch('https://api.openweathermap.org/data/2.5/weather?q=' + citySearch + '&appid=efc0b67a43b8a0ef061f770e6ba10b53&units=metric'); //mettre la clé
     let dataTransformed     = await data.json();
     let weather             = dataTransformed.weather[0].main;
-    let icon                = dataTransformed.weather[0].icon;
-    let dayOrNight          = icon[2];
 
-    cityDisplay.innerText       = dataTransformed.name;
-    temp.innerText              = dataTransformed.main.temp + "°C";
-    tempMin.innerText           = dataTransformed.main.temp_min + "°C";
-    tempFeelsLike.innerText     = dataTransformed.main.feels_like + "°C";
-    pressure.innerText          = dataTransformed.main.pressure + "Pa";
-    humidity.innerText          = dataTransformed.main.humidity + "%";
-    windSpeed.innerText         = dataTransformed.wind.speed + "km/h";
-    img.setAttribute('src', "http://openweathermap.org/img/wn/" + icon + "@4x.png" );
-    citySearch.value ='';
-
-   bodybackground(dayOrNight,weather);
+    fillElements(dataTransformed,weather);
 }
+
+// Ecouteurs d'évènement
 
 button.addEventListener('click', () => {
     citySearch = document.querySelector('#city-search');
@@ -134,3 +136,7 @@ form.addEventListener('keypress', (event) => {
         majData(citySearch.value);
     }
 });
+
+// Actualisation des données toutes les 10 minutes
+
+setInterval(callApi,600000);
