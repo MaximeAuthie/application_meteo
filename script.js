@@ -105,7 +105,7 @@ function geolocationError () {
 // Appel de l'API en géolocalisant l'utilisateur (lattitude, longitude)
 if ("geolocation" in navigator) {
     navigator.geolocation.watchPosition( async (position) => {
-        let data                = await fetch('https://api.openweathermap.org/data/2.5/weather?lon=' + position.coords.longitude + '&lat='+ position.coords.latitude + '&appid=efc0b67a43b8a0ef061f770e6ba10b53&units=metric'); //mettre la clé
+        let data                = await fetch('https://api.openweathermap.org/data/2.5/weather?lon=' + position.coords.longitude + '&lat='+ position.coords.latitude + '&appid=&units=metric'); //mettre la clé
         let dataTransformed     = await data.json();
         let weather             = dataTransformed.weather[0].main;
 
@@ -115,7 +115,7 @@ if ("geolocation" in navigator) {
 
 // Appel de l'API lors du click de recherche (nom de ville)
 let majData = async (citySearch) => {
-    let data                = await fetch('https://api.openweathermap.org/data/2.5/weather?q=' + citySearch + '&appid=efc0b67a43b8a0ef061f770e6ba10b53&units=metric'); //mettre la clé
+    let data                = await fetch('https://api.openweathermap.org/data/2.5/weather?q=' + citySearch + '&appid=&units=metric'); //mettre la clé
     let dataTransformed     = await data.json();
     let weather             = dataTransformed.weather[0].main;
 
