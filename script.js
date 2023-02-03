@@ -1,5 +1,5 @@
 // Récupérer tous les éléments du DOM modifiables
-let citySearch      = '';
+let citySearch      = document.querySelector('#city-search');
 let cityDisplay     = document.querySelector('#city-display');
 let img             = document.querySelector('#icon');
 let temp            = document.querySelector('#temp');
@@ -10,6 +10,9 @@ let humidity        = document.querySelector('#humidity');
 let windSpeed       = document.querySelector('#wind');
 let button          = document.querySelector('#magnifying-glass');
 let form            = document.querySelector('#city-search');
+let update          = document.querySelector('#update');
+import {cle} from './cles.js'; 
+
 
 // Fonction permettant de changer le background de body
 function bodybackground (dayOrNight, weather) {
@@ -72,7 +75,6 @@ function bodybackground (dayOrNight, weather) {
 
 // Fonction permettant de compléter les éléments du DOM après l'appel de l'API
 function fillElements (apiResponse, weather) {
-    // let weather                 = apiResponse.weather[0].main;
     let weatherIcon             = apiResponse.weather[0].icon;
     let dayOrNight              = weatherIcon[2];
 
@@ -86,7 +88,7 @@ function fillElements (apiResponse, weather) {
     img.setAttribute('src', "http://openweathermap.org/img/wn/" + weatherIcon + "@4x.png" );
     citySearch.value ='';
     console.log('Actualisation OK');
-        bodybackground(dayOrNight,weather);
+    bodybackground(dayOrNight,weather);
 }
 
 // Fonction pour appeller l'API dans l'objectif d'actualiser les données
@@ -105,7 +107,7 @@ function geolocationError () {
 // Appel de l'API en géolocalisant l'utilisateur (lattitude, longitude)
 if ("geolocation" in navigator) {
     navigator.geolocation.watchPosition( async (position) => {
-        let data                = await fetch('https://api.openweathermap.org/data/2.5/weather?lon=' + position.coords.longitude + '&lat='+ position.coords.latitude + '&appid=&units=metric'); //mettre la clé
+        let data                = await fetch('https://api.openweathermap.org/data/2.5/weather?lon=' + position.coords.longitude + '&lat='+ position.coords.latitude + '&appid=' + cle + '&units=metric'); //mettre la clé
         let dataTransformed     = await data.json();
         let weather             = dataTransformed.weather[0].main;
 
@@ -115,7 +117,7 @@ if ("geolocation" in navigator) {
 
 // Appel de l'API lors du click de recherche (nom de ville)
 let majData = async (citySearch) => {
-    let data                = await fetch('https://api.openweathermap.org/data/2.5/weather?q=' + citySearch + '&appid=&units=metric'); //mettre la clé
+    let data                = await fetch('https://api.openweathermap.org/data/2.5/weather?q=' + citySearch + '&appid=' + cle + '&units=metric'); //mettre la clé
     let dataTransformed     = await data.json();
     let weather             = dataTransformed.weather[0].main;
 
@@ -137,6 +139,11 @@ form.addEventListener('keypress', (event) => {
     }
 });
 
+update.addEventListener('click', () => {
+    cityDisplay = document.querySelector('#city-display');
+    majData(cityDisplay.innerText);
+})
+    
 // Actualisation des données toutes les 10 minutes
 
 setInterval(callApi,600000);

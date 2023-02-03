@@ -22,11 +22,27 @@ body {
     display: flex;
     flex-direction: column;
 }
+#top-container {
+    display: flex;
+    flex-direction: row;
+    flex : 10%;
+    align-items: center;
+}
 
 #city-display {
-    flex: 20%;
+    flex: 90%;
     font-size: 2em;
     padding-top: 15px;
+}
+
+#refresh {
+    flex:10%;
+    color: white;
+    cursor: pointer;
+}
+
+#refresh img {
+    height: 25px;
 }
 
 #main-informations {
