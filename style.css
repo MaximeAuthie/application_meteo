@@ -129,3 +129,72 @@ input {
     cursor: pointer;
 }
 
+@media screen and (max-width: 1400px) {
+    #container {
+       width: 50%;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+     #container {
+        width: 60%;
+     }
+}
+
+@media screen and (max-width: 900px) {
+    #container {
+       width: 70%;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    #container {
+       width: 80%;
+    }
+
+    h3 {
+        font-size: medium;
+    }
+
+    #temp {
+        font-size: 2.5em;
+    }
+
+    #icon {
+        margin-left: 5px;
+    }
+    img {
+        max-width: 40%;
+        height: auto;
+    }
+
+    #bottom {
+        display: flex;
+        flex-direction: row;
+        flex: 40%;
+    }
+
+    #other-informations {
+        display: flex;
+        flex-direction: column;
+        flex : 60%;
+        justify-content: space-between;
+        padding-bottom: 0px;
+    }
+
+    #other-informations div {
+        flex:20%;
+        padding-top: 16px;
+    }
+
+    #titles {
+        display: flex;
+        flex-direction: column;
+        flex : 40%;
+        text-align: start;
+        padding-left: 15px;
+    }
+    #search-container {
+        width: 80%;
+    }
+}
